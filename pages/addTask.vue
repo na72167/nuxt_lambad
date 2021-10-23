@@ -1,10 +1,9 @@
 <template>
 <div>
-    <!-- タスクの数だけ表示 -->
-    <div v-for="(list,index) in taskList" :key="index">
-    <div> ID： {{ list.id }} </div>
-    <div> タスク名：{{ list.name }} </div>
-    </div>
+  <div>
+    <div>タスクの追加</div>
+
+  </div>
 </div>
 </template>
 
