@@ -1,27 +1,48 @@
 <template>
-<div>
   <div>
-    <div>タスクの追加</div>
-
+    <div>
+      <div>タスクの追加</div>
+      <form @submit.prevent="addTask">
+        <input type="text" placeholder="IDの記入" v-model="id">
+        <input type="text" placeholder="タスクの追加" v-model="text">
+        <button
+          type="submit"
+        >
+        タスクの追加
+        </button>
+      </form>
+    </div>
   </div>
-</div>
 </template>
 
-<script lang="ts">
-import Vue from 'vue'
-import axios from 'axios'
-export default Vue.extend({
-data() :{ taskList: Array<{id:any, name:any}> } {
-    return {
-    taskList: []
-    }
-},
-async mounted() {
-    // 画面描画時にタスクの全件取得を行う
-    this.taskList = []
-    const response = await axios.get('https://cldu07velj.execute-api.ap-northeast-1.amazonaws.com/prod/item')
-    this.taskList = response.data.Items
-},
+次にやる事
+タスク追加分のメソッド動作の確認
+変更
 
-})
+<script lang="ts">
+import { Component, Vue } from "nuxt-property-decorator";
+import axios from 'axios'
+
+@Component
+export default class addTask extends Vue {
+
+  public id: string | null = null;
+  public text: string | null = null;
+
+  public async addTask() {
+
+    if(this.text !== null){
+      try {
+        console.log("タスク追加処理に入ります");
+        const list = {
+          name: this.text,
+        }
+        const registUser = await axios.post('',list);
+      } catch (e) {
+        console.log("登録処理中に例外エラーが発生しました。");
+      }
+    }
+
+  }
+}
 </script>
